@@ -1,0 +1,530 @@
+<html>
+
+	<head>
+		<title>Rap Visuals</title>
+
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="http://d3js.org/topojson.v2.min.js"></script>
+		<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900i" rel="stylesheet">
+
+	</head>
+
+
+	<body>
+
+		<style>
+
+		*{
+			padding: 0; /** normalize */
+			margin:  0; /** normalize */
+		}
+
+		a{
+			color: black;
+		}
+
+		h3,h4{
+			font-weight: 400;
+			margin-top: 10px;
+			font-family: 'Open Sans', sans-serif;
+		}
+
+		svg{
+			display: block;
+			margin: 0 auto;
+			/*border: 1px solid #D75C5D;*/
+		}
+
+		.header{
+			padding-top: 150px;
+			height: 450px;
+			width: 100%;
+			text-align: center;
+		}
+
+		.header h1{
+			font-family: 'Playfair Display', serif;
+			font-weight: 900;
+			font-style: italic;
+			font-size: 96px;
+			margin-bottom: 20px;
+		}
+
+		.text{
+			background-color: #F7F7F7;
+			text-align: justify;;
+			padding: 50px 0px 30px 0px;
+		}
+
+		.text p{
+			width: 50%;
+			margin: 0px auto 20px auto;
+			font-size: 16px;
+			font-family: 'Playfair Display', serif;
+			line-height: 24px;
+		}
+
+		.viz{
+			padding: 50px 0;
+			background-color: #EAEAEA;
+			font-family: 'Open Sans', sans-serif;
+		}
+
+		.footer{
+			padding: 20px 0;
+			font-family: 'Open Sans', sans-serif;
+		}
+
+		.footer p{
+			color: #232323;
+			font-size: 12px;
+			font-weight: 600;
+			text-align: center;
+		}
+		IMG.center{
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 100px;
+			height: auto;
+		}
+
+		</style>
+
+		<div class="header">
+
+			<h1>
+				Rap's <br>
+				Largest Ego
+			</h1>
+
+			<h3>Just how much does Kanye love Kanye?</h3>
+
+			<h4>By <a href="https://github.com/niranjanravi/3300-Project-1">Charles, Michael and Niranjan</a></h4>
+
+		</div>
+
+		<div class="text" id="t1">
+			<p> For decades, rap has been about the ego &mdash;
+		Lyrics have centered around money, fame, and other measures of success. In popular culture, Kanye West is perhaps the most notable for his notoriously inflated ego: He infamously interrupted Taylor Swift's acceptance speech at the 2009 MTV awards to voice that not she, but Beyonc&eacute; was the rightful recipient of the award; he has produced countless provocative music videos &mdash; one of which features him in bed with 12 other naked celebrities &mdash; to stroke his ego; and he has been qutoted comparing himself to greats like Leonardo Da Vinci, Steve Jobs, and even God. </p>
+
+		<p>It's quite obvious that Kanye has an ego, but how large is it, exactly? We wanted to put our question to to test, so we assembled together a sample of ten current and popular rappers: Kanye (of course), Lil' Wayne, Drake, Future, Desiigner, Gucci Mane, Chief Keef, Fetty Wap, 2 Chainz, and 50 Cent.</p>
+
+		<p>To compare these rappers, we needed a way to quantify ego and we settled on defining ego as the number of self-references a rapper dropped in his songs, normalized over all the words in his songs. Self-references include nicknames and stage-names but not personal pronouns like "I", "me", and "my" (as the use of the personal pronoun doesn't necessarily indicate egotism, while a third-person reference to oneself most definitely does). To visualize our data, we also thought to look at how ego correleated to other metrics like success, which we have defined as album sales, and prolificness, which we have defined as lifetime discography. </p>
+
+		<IMG class = "center" src = "desiigner-median.png"/>
+
+		<p> <br> Meet Desiigner, a newcomer on the rap scene who has quite fortunately already found himself in the limelight of fame. Desiigner is our "median egotistical rapper", or in other words, his ego score lies smack dab in the middle of the ego scores of the other rappers we've collected. Notice the red ring around his head &mdash; that represents his ego. Since he's the median egotistical rapper, we have standardized the circle to fit 1.0 times the size of his head. For other rappers in our graphic, you can read the size of the circle in relation to the rapper's head as "How many times bigger is the ego of this rapper than that of the median egotistical rapper?" </p>
+
+</div>
+
+
+		<div class="viz" id="v1">
+			<svg height="650" width="1000" id="svg1"></svg>
+		</div>
+
+		<div class="text" id="t2">
+
+
+		<p>Oh, and as you might have noticed, for comedic effect we made Kanye look like this: </p>
+
+		<IMG class = "center" src ="facesbw/kanye.png" />
+
+
+		<center><p> Because, why not?</p></center>
+	</div>
+
+		<div class="viz" id="v2">
+			<svg height="500" width="1000" id="svg2"></svg>
+		</div>
+
+		<div class="text" id="t3">
+			<p> We wanted to give another way to visualize ego, so we created a second graphic, which shows the frequency of self-reference drops. </p>
+			<p> The number displayed by each rapper name is the average number of words between self-references.  Mind you again, these are not references like "I" or "me", no, these are third-person references like "Tunechi" (Lil' Wayne) or "King Sosa" (Chief Keef).
+			For example, a Kanye song might contain a snippet that looks a little bit like this: </p>
+
+			<p> <center> ... <i> Yeezus</i>... [98 words]...<i> The Louis Vuitton Don </i>... </center> </p>
+
+			<p> To wrap it all up, it seems that our initial hypothesis was correct, Kanye does indeed have the largest ego &mdash; for this data set at least. Adding more rappers in the mix, we might expect to see something else, but as far as popular rappers go, there's no doubt in our minds that Kanye reigns supreme. Bow down to the king. </p>
+
+
+		</div>
+
+		<div class="footer">
+			<p>A CS/INFO 3300 Project. Read the full PDF report <a href="writeup.pdf">here.</a></p>
+		</div>
+
+		<script>
+
+		var faces = ["fetty-wap.png","wayne.png","2-chainz.png","502.png","desiigner.png","kanye.png","future.png","keef.png", "drake.png","gucci.png"];
+
+		var svg = d3.select("#svg1");
+		var fileData;
+		var nameFreq = [];
+		var rapperData =
+		[
+			{name: "fetty_wap" , songs: 31, sales: 0.3},
+			{name: "lil_wayne" , songs: 258, sales: 13.4},
+			{name: "2_chainz" , songs: 102, sales: 0.9},
+			{name: "50_cent" , songs: 186, sales: 15.7},
+			{name: "desiigner" , songs: 12, sales: .02},
+			{name: "kanye" , songs: 219, sales: 13.5},
+			{name: "future" ,songs: 104, sales: 0.8},
+			{name: "chief_keef" ,songs: 50, sales: 0.2},
+			{name: "drake" ,songs: 153, sales: 7.4},
+			{name: "gucci_mane" ,songs: 120, sales: 1.1}
+		];
+
+		//converts the name from the file to correctly stylized name. E.g. "fetty_wap" to "Fetty Wap"
+		function capitalize_each_word(file_name){
+			var words = file_name.split("_");
+			words.forEach(function(word, index){
+				words[index] = word[0].toLocaleUpperCase() + word.substring(1);
+			});
+
+			return words.join(" ");
+		}
+
+		
+
+		d3.json("rappers.json",function(data){
+
+			console.log("JSON data loaded");
+			fileData = data;
+
+			//Processing our data for frequency of name drops (Graphic 2)
+			rapperData.forEach(function(rapper){
+				rapper.count = fileData[rapper.name].count;
+				rapper.totalwords = fileData[rapper.name].totalwords;
+				var freq = rapper.totalwords/rapper.count;
+				nameFreq.push({'name' : rapper.name ,'freq' : freq});
+			});
+
+			//X and Y scales for the graphic
+			var songExtent = d3.extent(rapperData, function(d){ return d.songs; });
+			var saleExtent = d3.extent(rapperData, function(d){ return d.sales; });
+
+			var songScale = d3.scaleLinear()
+			.domain([0, (songExtent[1] + .1 * songExtent[1]) ])
+			.range([20, svg.attr("width") - 100]);
+
+			var saleScale = d3.scaleSqrt()
+			.domain([0, (saleExtent[1] + .2 * saleExtent[1])] )
+			.range([svg.attr("height") - 50, 120]);
+
+			//Define medianEgo and kanyeEgo(max) to make a scale for the ego circle radii
+			var medianEgo = .00236;
+			var kanyeEgo = .0102;
+
+			var egoScale = d3.scaleLinear()
+			.domain([medianEgo,kanyeEgo])
+			.range([1,5]);
+
+			//Adding Axes and Labels
+
+			var songAxis = d3.axisBottom(songScale);
+			var saleAxis = d3.axisLeft(saleScale);
+
+			var plot = svg.append("g");
+			plot.attr("transform","translate(50,-40)");
+			plot.append("g").attr("transform","translate(-20, " + (svg.attr("height") - 50)  + ")" ).call(songAxis);
+			plot.append("g").attr("transform","translate(0,0)").call(saleAxis);
+
+			svg.append('text')
+			.attr("transform","translate(20," + (svg.attr("height") - 200) +")rotate(-90)")
+			.attr("font-weight","700")
+			.text("Number of Albums Sold (Millions)");
+
+			svg.append("text")
+			.attr("transform","translate("+svg.attr("width")/2+"," + (svg.attr("height") -25) +")")
+			.attr("text-anchor","middle")
+			.attr("font-weight","700")
+			.text("Lifetime Discography");
+
+
+			svg.append("text")
+			.attr("transform","translate(50," + (svg.attr("height") -5) +")")
+			.attr("text-anchor","start")
+			.attr("font-size","12")
+			.attr("stroke", "#FD334D")
+			.attr("opacity", .8)
+			.attr("font-weight", 300)
+			.text("*2 Chainz should belong at the asterisk, but due to graphical constraints, we moved him.");
+
+			//Creating Key for Graphic 1
+			var key_x = 230
+			font_sz = 11
+			plot.append("circle")
+				.attr("cx", songScale(key_x))
+				.attr("cy", saleScale(1.1))
+				.attr("r",75)
+				.attr("fill","none")
+				.style("stroke-dasharray", ("3, 3"))
+				.attr("fill", "none")
+				.attr("stroke", "#D75C5D")
+				.attr("stroke-opacity", 1)
+				.attr("stroke-width", 2);
+
+			plot.append("text")
+				.attr("x", songScale(key_x))
+				.attr("y", saleScale(1.5))
+				.attr("text-anchor", "middle")
+				.text("Size of a rapper's")
+				.attr("stroke", "#D75C5D")
+				.attr("font-size", font_sz);
+
+			plot.append("text")
+				.attr("x", songScale(key_x))
+				.attr("y", saleScale(1.1))
+				.attr("text-anchor", "middle")
+				.text(" ego in relation")
+				.attr("stroke", "#D75C5D")
+				.attr("font-size", font_sz);
+
+			plot.append("text")
+				.attr("x", songScale(key_x))
+				.attr("y", saleScale(.7))
+				.attr("text-anchor", "middle")
+				.text("to the median ego")
+				.attr("stroke", "#D75C5D")
+				.attr("font-size", font_sz);
+
+
+			//Plotting Rappers
+			rapperData.forEach(function(rapper, i){
+				var x = songScale(rapper.songs); /* x scale for rapper */
+				var y = saleScale(rapper.sales); /* y scale for rapper */
+
+				//Shifting 2 Chainz
+				if(rapper.name == "2_chainz"){
+
+					plot.append("text")
+					.attr("x", x - 25)
+					.attr("y", y + 10)
+					.text("*")
+					.attr("stroke-width", "1")
+
+					.attr("stroke", "#FD334D")
+					.attr("stroke-opacity", 1);
+
+					x = x
+					y = y- 150;
+				}
+				//Rapper Image
+				plot.append('image')
+				.attr("xlink:href", "facesbw/"+faces[i])
+				.attr('x', x-30)
+				.attr('y', y-30)
+				.attr('height', 60)
+				.attr('width', 60);
+
+				//Rapper Ego
+				plot.append("circle")
+				.attr("cx", x)
+				.attr("cy", y)
+				.attr("r",egoScale(rapper.count/rapper.totalwords)*30) //r = Nickname count over total words times 30(correlates to our std head size)
+				.style("stroke-dasharray", ("3, 3"))
+				.attr("fill", "none")
+				.attr("stroke", "#D75C5D")
+				.attr("stroke-opacity", 1)
+				.attr("stroke-width", 2);
+
+				//Rapper identifier circle
+				plot.append("circle")
+				.attr("cx", x)
+				.attr("cy", y)
+				.attr("r",3)
+				.attr("fill","none")
+				.attr("stroke", "#FC354D")
+				.attr("stroke-width",1)
+				.attr("opacity",0.5);
+
+				//Special Annotation for Kanye
+				if(rapper.name == "kanye") {
+					plot.append("line")
+					.attr("x1", x)
+					.attr("x2", x+120)
+					.attr("y1", y)
+					.attr("y2", y+120)
+					.attr("stroke", "#FC354D")
+					.attr("stroke-width",1)
+					.attr("opacity",0.5);
+
+					plot.append("rect")
+					.attr("x", x+120)
+					.attr("y", y+120)
+					.attr("fill","#FD334D")
+					.attr("height", "25px")
+					.attr("width", "105px");
+
+					plot.append("text")
+					.attr("x",x+125)
+					.attr("y",y+135)
+					.attr("font-size", "10px")
+					.attr("fill", "white")
+					.text("Kanye (Highest Ego)");
+				}
+				//Special Annotation for Drake
+				else if(rapper.name == "drake") {
+					plot.append("line")
+					.attr("x1", x)
+					.attr("x2", x+50)
+					.attr("y1", y)
+					.attr("y2", y+70)
+					.attr("stroke", "#FC354D")
+					.attr("stroke-width",1)
+					.attr("opacity",0.5);
+
+					plot.append("rect")
+					.attr("x", x+50)
+					.attr("y", y+70)
+					.attr("fill","#FD334D")
+					.attr("height", "25px")
+					.attr("width", "105px");
+
+					plot.append("text")
+					.attr("x",x+55)
+					.attr("y",y+85)
+					.attr("font-size", "10px")
+					.attr("fill", "white")
+					.text("Drake (Lowest Ego)");
+
+				}
+				//Special Annotation for Desiigner
+				else if(rapper.name == "desiigner") {
+					plot.append("line")
+					.attr("x1", x)
+					.attr("x2", x)
+					.attr("y1", y)
+					.attr("y2", y-100)
+					.attr("stroke", "#FC354D")
+					.attr("stroke-width",1)
+					.attr("opacity",0.5);
+
+					plot.append("rect")
+					.attr("x", x-55)
+					.attr("y", y-125)
+					.attr("fill","#FD334D")
+					.attr("height", "25px")
+					.attr("width", "110px");
+
+					plot.append("text")
+					.attr("x",x-54)
+					.attr("y",y-110)
+					.attr("font-size", "10px")
+					.attr("fill", "white")
+					.text("Desiigner (Median Ego)");
+				}
+				//Annotations for everyone else
+				else{
+					plot.append("line")
+					.attr("x1", x)
+					.attr("x2", x)
+					.attr("y1", y)
+					.attr("y2", y-85)
+					.attr("stroke", "#FC354D")
+					.attr("stroke-width",1)
+					.attr("opacity",0.5);
+
+					var g = plot.append("g");
+
+					var rect = g.append("rect")
+					.attr("x", x-55)
+					.attr("y", y-110)
+					.attr("fill","#FD334D")
+					.attr("height", "25px");
+
+					var text = g.append("text")
+					.attr("x",x-54)
+					.attr("y",y-95)
+					.attr("font-size", "10px")
+					.attr("fill", "white")
+					.attr("text-anchor","start")
+					.text(capitalize_each_word(rapper.name));
+
+					//Adding a star to 2 Chainz's annotation
+					if(rapper.name=="2_chainz"){
+						text.text(text.text()+"*");
+					}
+
+					//Formatting the annotation properly
+					g.selectAll("rect").attr("width",function(d){ return this.parentNode.getBBox().width + 10;});
+
+					rect.attr("x",x - rect.attr("width")/2);
+					text.attr("x", Number(rect.attr("x")) + 3)
+				}
+
+			});
+
+			//Pyramid Graphic
+			var svg2 = d3.select('#svg2');
+
+			var freqExtent = d3.extent(nameFreq, function(d){return d.freq;});
+			var frequencies = nameFreq.map(function(d) {return d});
+
+			//Creating Scales for the Pyramid Graphic
+			var xScale = d3.scaleLinear()
+			.domain([0, freqExtent[1]])
+			.range([0,500]);
+
+			var yScale = d3.scaleLinear()
+			.domain([10,0])
+			.range([400, 10]);
+
+			//Sorting Rappers by Word Frequency
+			nameFreq.sort(function(a,b){
+				return a.freq - b.freq;
+			});
+
+			var plot2 = svg2.append("g").attr("transform", "translate(500, 100)");
+
+			//Plotting the bars
+			nameFreq.forEach(function(d, i){
+				//Creating the Bars 
+				plot2.append("rect")
+				.attr("height","36px")
+				.attr("width",2*xScale(d.freq))
+				.attr("stroke","#FC354D")
+				.attr("fill", "#FD334D")
+				.attr("fill-opacity",0.1 * (10 - i))
+				.attr("x",-xScale(d.freq))
+				.attr("y",yScale(i)-20);
+
+				//Adding Text to Each Rect
+				plot2.append("text")
+				.attr("stroke", "black")
+				.attr("font-size", 10)
+				.attr("y",yScale(i))
+				.attr("text-anchor","middle")
+				.attr("letter-spacing","1px")
+				.text(capitalize_each_word(d.name).toLocaleUpperCase() + " " + Math.round(d.freq));
+			});
+
+			//Adding the Crown Image
+
+			plot2.append("image")
+			.attr("xlink:href", "crown.png")
+			.attr("x", xScale(0) - 25)
+			.attr("y",yScale(0)  - 65)
+			.attr("height", 50)
+			.attr("width", 50);
+
+			//Adding the Title
+
+			svg2.append("text")
+			.attr("x", 500)
+			.attr("y", 20)
+			.attr("font-weight",700)
+			.attr("font-family", "Open Sans")
+			.attr("font-size", 24)
+			.attr("text-anchor", "middle")
+			.text("Words Between Self-References");
+
+		});
+
+		</script>
+	</body>
+</html>
